@@ -1,5 +1,6 @@
 import React from 'react'
 import heroimg from './../../images/heroimg.jpg'
+import '../../App.css'
 
 export default function Hero() {
     return (
