@@ -1,6 +1,6 @@
 import React from 'react'
 import heroimg from './../../images/apartment.webp'
-import '../../App.css'
+import './Hero.css'
 
 export default function Hero() {
     return (
