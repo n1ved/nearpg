@@ -1,5 +1,5 @@
 import React from 'react'
-import heroimg from './../../images/heroimg.jpg'
+import heroimg from './../../images/apartment.webp'
 import '../../App.css'
 
 export default function Hero() {
@@ -7,6 +7,7 @@ export default function Hero() {
         <div className='hero'>
             <div className='nav'>
                 <div className='nav-left'>
+                    <h1 className='icon-decoration'>/</h1>
                     <h1>NearPG</h1>
                 </div>
                 <div className='nav-right'>
