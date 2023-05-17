@@ -54,7 +54,6 @@ a {
     flex-direction: row;
     justify-content: flex-start;
     align-content: center;
-
 }
 
 .hero-left,
@@ -81,8 +80,29 @@ a {
     background-color: #ffd26a;
     color: #006695;
     font-size: 16px;
+
+}
+
+.hero-right {
+    max-height: 30vw;
 }
 
 .hero-right img {
     width: 40vw;
+    box-sizing: border-box;
+    animation: hero-bounce infinite 2s;
+}
+
+@keyframes hero-bounce {
+
+    0%,
+    100% {
+        margin-top: 0;
+        margin-bottom: 1vw;
+    }
+
+    50% {
+        margin-top: 1vw;
+        margin-bottom: 0;
+    }
 }
