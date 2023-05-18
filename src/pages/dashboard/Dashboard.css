@@ -97,8 +97,16 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 
 }
+
+.card-cont::-webkit-scrollbar {
+    display: none;
+}
+
 
 .dashboard-head,
 .form-head {

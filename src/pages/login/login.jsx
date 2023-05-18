@@ -21,7 +21,6 @@ export default function Login() {
                 const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
-                console.log(user);
                 navigate("/dashboard");
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
