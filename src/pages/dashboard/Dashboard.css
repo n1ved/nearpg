@@ -1,0 +1,143 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard {
+    box-sizing: border-box;
+    background-image: linear-gradient(45deg, #00a8be, #00d6f0);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.page-cont {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 97vh;
+}
+
+.sideBar,
+.card-cont,
+.form-cont {
+    box-sizing: border-box;
+    margin: 1%;
+    min-height: 99%;
+    width: 300px;
+    max-width: 300px;
+    background-color: #f7fbff;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.hero-title {
+    font-size: 26px;
+    color: #000;
+}
+
+.links-cont {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.links-cont a {
+    width: 100%;
+    font-size: 25px;
+    text-align: start;
+    padding: 15px 20px;
+    margin: 5px 0px;
+    background-color: #000;
+    border-radius: 20px;
+    color: #fff;
+    border: solid 1px #000;
+}
+
+.links-cont a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.user-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.avatar,
+.avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+}
+
+.logout-btn {
+    font-size: 26px;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    border: 2px solid #000;
+}
+
+.card-cont {
+    width: 1000px;
+    max-width: 1000px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.dashboard-head,
+.form-head {
+    padding-left: 40px;
+    width: 100%;
+    font-size: 48px;
+    text-align: left;
+}
+
+.form-cont {
+    width: 500px;
+    max-width: 500px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form-cont input {
+    font-size: 20px;
+    width: 410px;
+    padding: 10px;
+    height: 55px;
+    margin: 10px;
+    border: 0px;
+    background-color: #EFEFEF;
+    border-radius: 20px;
+}
+
+.address-input {
+    height: 220px !important;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.submit-buttton {
+    width: 190px !important;
+    background-color: #000 !important;
+    color: white;
+}
