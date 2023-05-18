@@ -41,11 +41,15 @@ export default function Dashboard() {
                         <form className='uploadForm'>
                             <input type='text' id='hname' placeholder='Enter House Name'></input>
                             <br />
-                            <input type='text' id='hnum' placeholder='Enter House Number'></input>
+                            <input type='text' id='hfacilites' placeholder='Enter Facilities'></input>
                             <br />
                             <input type='text' id='haddr' placeholder='Enter Address' className='address-input'></input>
                             <br />
                             <input type='number' id='hph' placeholder='Enter Phone Number'></input>
+                            <br />
+                            <input type='email' id='hemail' placeholder='Enter Email'></input>
+                            <br />
+                            <input type='number' id='hrent' placeholder='Enter Rent'></input>
                             <input type='submit' id='hsubmit' className='submit-buttton'></input>
                         </form>
                     </div>
