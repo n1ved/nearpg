@@ -159,7 +159,8 @@ body {
 
 .form-cont input,
 .upload-btn,
-.image-upload-label {
+.image-upload-label,
+.submit-buttton {
     font-size: 20px;
     width: 410px;
     padding: 10px;
@@ -178,7 +179,7 @@ body {
     width: 200px !important;
 }
 
-form {
+.uploadForm {
     display: flex;
     flex-direction: column;
     align-items: center;

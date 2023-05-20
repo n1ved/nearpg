@@ -2,12 +2,13 @@ import { React, useContext } from 'react'
 import './Dashboard.css'
 import DashboardCard from './DashboardCard'
 import { AuthContext } from '../../context'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
-import { storage } from '../../firebase';
+import { storage, database } from '../../firebase';
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 export default function Dashboard() {
 
@@ -18,11 +19,17 @@ export default function Dashboard() {
         hfacil: "",
         hph: "",
         hphoto: "",
-        hrent: ""
+        hrent: "",
+        hmail: ""
     };
+
     const imageLabelValue = "Select Image";
+    const uploadlabelInit = "Upload";
+    const submitLableInit = "Submit";
 
     const [imgLbl, setImgLbl] = useState(imageLabelValue);
+    const [uploadlabel, setUploadlabel] = useState(uploadlabelInit);
+    const [submitLabel, setSubmitlabel] = useState(submitLableInit);
     const [pg, setPg] = useState(initialValue);
     const [file, setFile] = useState(null);
     const [urlkey, seturlkey] = useState("");
@@ -38,17 +45,34 @@ export default function Dashboard() {
         setPg({ ...pg, [name]: value });
     }
 
+    const handleAddDoc = () => {
+        pg.photoURL = user.photoURL;
+        pg.hmail = user.email;
+        const dbInstance = collection(database, "pg");
+
+        addDoc(dbInstance, {
+            ...pg,
+        });
+        setSubmitlabel("Submitted");
+        fetchPost();
+        setPg(initialValue);
+        setImgLbl(imageLabelValue);
+        setUploadlabel(uploadlabelInit);
+        setSubmitlabel(submitLableInit);
+    };
+
     const handleImageUpload = () => {
         const uploadImageRef = ref(storage, `images/${file.name}`);
         console.log("file ready to upload reference set...");
 
         uploadBytes(uploadImageRef, file).then((snapshot) => {
-            console.log("Image uploaded...");
+
+            setUploadlabel("Uploaded");
 
             getDownloadURL(uploadImageRef).then((url) => {
                 seturlkey(url);
                 setPg({
-                    ...pg, photoURL: url
+                    ...pg, hphoto: url
                 });
                 console.log(url);
             }).catch((error) => {
@@ -58,10 +82,25 @@ export default function Dashboard() {
 
     }
 
-    console.log(pg);
+    const [data, setData] = useState([]);
 
+    const fetchPost = async () => {
+        const db = database;
+        await getDocs(collection(db, "pg")).then((querySnapshot) => {
+            const newData = querySnapshot.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            console.log(newData, "newData");
+            setData(newData);
+        });
+    };
+
+    useEffect(() => {
+        fetchPost();
+    }, []);
     const { user, loading } = useContext(AuthContext);
-    // console.log(user);
+    console.log(user);
     if (user) {
         return (
             <div className='dashboard'>
@@ -87,13 +126,22 @@ export default function Dashboard() {
                     </div>
                     <div className='card-cont'>
                         <h1 className='dashboard-head'>Dashboard</h1>
-                        <DashboardCard />
-                        <DashboardCard />
-                        <DashboardCard />
+                        {data.map((data, index) => (
+                            <DashboardCard
+                                key={index}
+                                houseName={data.hname}
+                                houseAddr={data.haddr}
+                                houseImgUrl={data.hphoto}
+                                housePH={data.hph}
+                                houseFacil={data.hfacil}
+                                houseRent={data.hrent}
+                                houseMail={data.hmail}
+                            />
+                        ))}
                     </div>
                     <div className='form-cont'>
                         <h1 className='form-head'>Add new PG</h1>
-                        <form className='uploadForm'>
+                        <div className='uploadForm'>
                             <input type='text' id='hname' name='hname' value={pg.hname} onChange={handleChange} placeholder='Enter House Name'></input>
                             <br />
                             <input type='text' id='hfacil' name='hfacil' value={pg.hfacil} onChange={handleChange} placeholder='Enter Facilities'></input>
@@ -104,7 +152,7 @@ export default function Dashboard() {
                                     <FontAwesomeIcon icon={faFile} />
                                     &ensp;{imgLbl}
                                 </label>
-                                <button className='upload-btn' onClick={handleImageUpload} type='button'>Upload</button>
+                                <button className='upload-btn' onClick={handleImageUpload} type='button'>{uploadlabel}</button>
                             </div>
                             <br />
                             <input type='text' id='haddr' name='haddr' value={pg.haddr} onChange={handleChange} placeholder='Enter Address' className='address-input'></input>
@@ -113,8 +161,8 @@ export default function Dashboard() {
 
                             <br />
                             <input type='number' id='hrent' name='hrent' value={pg.hrent} onChange={handleChange} placeholder='Enter Rent'></input>
-                            <input type='submit' id='hsubmit' className='submit-buttton'></input>
-                        </form>
+                            <button id='hsubmit' className='submit-buttton' onClick={handleAddDoc}> {submitLabel} </button>
+                        </div>
                     </div>
                 </div>
             </div >
