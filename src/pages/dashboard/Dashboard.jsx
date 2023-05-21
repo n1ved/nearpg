@@ -3,7 +3,6 @@ import './Dashboard.css'
 import DashboardCard from './DashboardCard'
 import { AuthContext } from '../../context'
 import { useState, useEffect } from 'react';
-import { initializeApp } from 'firebase/app';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
 import { storage, database } from '../../firebase';

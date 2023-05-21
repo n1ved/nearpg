@@ -1,9 +1,7 @@
 import React from 'react'
-import houseimg from '../../images/house.png'
 import './DashboardCard.css'
-import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee, faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
 
 export default function DashboardCard({ houseName, houseMail, houseAddr, houseImgUrl, housePH, houseFacil, houseRent, }) {
     return (
