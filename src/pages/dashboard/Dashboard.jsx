@@ -64,7 +64,6 @@ export default function Dashboard() {
 
     const handleImageUpload = () => {
         const uploadImageRef = ref(storage, `images/${file.name}`);
-        console.log("file ready to upload reference set...");
 
         uploadBytes(uploadImageRef, file).then((snapshot) => {
 
@@ -75,7 +74,6 @@ export default function Dashboard() {
                 setPg({
                     ...pg, hphoto: url
                 });
-                console.log(url);
             }).catch((error) => {
                 console.log(error);
             });
@@ -92,7 +90,6 @@ export default function Dashboard() {
                 ...doc.data(),
                 id: doc.id,
             }));
-            console.log(newData, "newData");
             setData(newData);
         });
     };
@@ -103,12 +100,10 @@ export default function Dashboard() {
 
     const handleLogout = async () => {
         await auth.signOut().then(function () {
-            console.log("loged out");
             navigate("/");
         })
     }
     const { user, loading } = useContext(AuthContext);
-    console.log(user);
     if (user) {
         return (
             <div className='dashboard'>
