@@ -5,11 +5,13 @@ import { AuthContext } from '../../context'
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
-import { storage, database } from '../../firebase';
+import { storage, database, auth } from '../../firebase';
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, getDocs } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
+    const navigate = useNavigate();
 
     const initialValue = {
         name: "",
@@ -98,6 +100,13 @@ export default function Dashboard() {
     useEffect(() => {
         fetchPost();
     }, []);
+
+    const handleLogout = async () => {
+        await auth.signOut().then(function () {
+            console.log("loged out");
+            navigate("/");
+        })
+    }
     const { user, loading } = useContext(AuthContext);
     console.log(user);
     if (user) {
@@ -120,7 +129,7 @@ export default function Dashboard() {
                                 <img src={user.photoURL} alt="avatar" />
                             </div>
                             <h1>{user.displayName}</h1>
-                            <button className='logout-btn'>Logout</button>
+                            <button className='logout-btn' onClick={handleLogout}>Logout</button>
                         </div>
                     </div>
                     <div className='card-cont'>
